@@ -10,8 +10,11 @@ import image6 from "../public/Group 6.png";
 import logoLg from "../public/logo.png";
 import logoSm from "../public/logo-sm.png";
 import { CarouselDemo } from "./components/carousel";
+import { useState } from "react";
 
 export default function Home() {
+  const [open, setOpen] = useState(false);
+
   const services = [
     { title: "Individual Counseling for Depression", link: "#", image: image1 },
     { title: "Child Therapy", link: "#", image: image2 },
@@ -30,44 +33,61 @@ export default function Home() {
       </div>
 
       {/* Navbar */}
-      <header className="flex items-center justify-between px-24 py-6 bg-white">
+      <header className="bg-white w-full">
+      <div className="flex items-center justify-between px-6 md:px-24 py-6">
+        {/* LOGO */}
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-full bg-[#cfd6c8] flex items-center justify-center text-[#e8a693] font-bold">
             <Image
               src={logoSm}
               alt="Chizara logo"
-              className="w-12 h-12"
-              objectFit="cover"
-              // fill
+              className="w-12 h-12 object-cover"
             />
           </div>
         </div>
 
-        <nav className="flex justify-between w-[50%] text-gray-600 text-center">
-          <a
-            className="hover:border-b-2 hover:border-black pb-1 w-1/3 hover:bg-gray-100 transition-colors duration-300"
-            href="#"
-          >
+        {/* DESKTOP NAV */}
+        <nav className="hidden md:flex justify-between w-[50%] text-gray-600 text-center">
+          <a className="hover:border-b-2 hover:border-black pb-1 w-1/3 hover:bg-gray-100 transition">
             Home
           </a>
-          <a
-            href="#"
-            className="hover:border-b-2 hover:border-black pb-1 w-1/3 hover:bg-gray-100 transition-colors duration-300"
-          >
+          <a className="hover:border-b-2 hover:border-black pb-1 w-1/3 hover:bg-gray-100 transition">
             About Us
           </a>
-          <a
-            href="#"
-            className="hover:border-b-2 hover:border-black pb-1 w-1/3 hover:bg-gray-100 transition-colors duration-300"
-          >
+          <a className="hover:border-b-2 hover:border-black pb-1 w-1/3 hover:bg-gray-100 transition">
             Services
           </a>
         </nav>
 
-        <button className="border text-gray-600 border-gray-400 rounded-full px-8 py-2 hover:cursor-pointer hover:bg-gray-600 hover:text-white transition-colors duration-300">
+        {/* DESKTOP BUTTON */}
+        <button className="hidden md:block border text-gray-600 border-gray-400 rounded-full px-8 py-2 hover:bg-gray-600 hover:text-white transition">
           Contact
         </button>
-      </header>
+
+        {/* MOBILE MENU BUTTON */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="md:hidden flex flex-col gap-1 hover:cursor-pointer"
+        >
+          <span className="w-6 h-0.5 bg-black" />
+          <span className="w-6 h-0.5 bg-black" />
+          <span className="w-6 h-0.5 bg-black" />
+        </button>
+      </div>
+
+      {/* ✅ MOBILE MENU */}
+      {open && (
+        <div className="md:hidden bg-white border-t flex flex-col items-center gap-6 py-8 text-gray-700">
+          <a className="text-lg">Home</a>
+          <a className="text-lg">About Us</a>
+          <a className="text-lg">Services</a>
+
+          <button className="border text-gray-600 border-gray-400 rounded-full px-10 py-2 hover:bg-gray-600 hover:text-white transition">
+            Contact
+          </button>
+        </div>
+      )}
+    </header>
 
       {/* Hero Section */}
       {/* <div className="relative w-full h-[500px] flex items-center overflow-hidden"> */}

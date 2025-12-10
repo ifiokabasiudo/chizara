@@ -60,7 +60,7 @@ export function CarouselDemo() {
     <div className="w-full overflow-hidden">
       <div
         id="Hero"
-        className="relative w-full h-screen flex flex-col justify-center items-center text-center px-8"
+        className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-screen flex flex-col justify-center items-center text-center px-8"
       >
         {/* {images.map((image, index) => ( */}
         {images.map((image, index) => (
@@ -75,7 +75,7 @@ export function CarouselDemo() {
               <Image
                 src={image.name}
                 alt={`Hero image ${index}`}
-                // fill
+                fill
                 className="object-cover"
                 priority={index === 0}
               />

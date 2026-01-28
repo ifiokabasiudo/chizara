@@ -6,13 +6,15 @@ import Image from "next/image";
 import Image1 from "../../public/hero-image-1.png";
 import Image2 from "../../public/hero-image-2.png";
 import Image3 from "../../public/hero-image-3.png";
+import Image4 from "../../public/hero-image-4.png";
+import Image5 from "../../public/hero-image-5.png";
 
 export function CarouselDemo() {
   const [currentImage, setCurrentImage] = useState<any>();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const heroText = useRef<HTMLDivElement>(null);
 
-  const images = [{ name: Image1 }, { name: Image2 }, { name: Image3 }];
+  const images = [{ name: Image1 }, { name: Image2 }, { name: Image3 }, { name: Image4 }, { name: Image5 }];
 
   useEffect(() => {
     if (!heroText.current) return;

@@ -9,7 +9,7 @@ export default function OurMission() {
       <div className="py-5 px-6 md:px-24">
         <h1 className="text-3xl font-bold pt-10 text-[#5b5b5b]">Our Mission</h1>
         <div className="flex w-full my-10 gap-10">
-          <div className="flex flex-col gap-6 w-2/3">
+          <div className="flex flex-col gap-6 md:w-2/3">
             <div className="flex flex-col gap-4">
               <p>
                 Our mission is to provide a safe, supportive, and empowering

@@ -9,6 +9,13 @@ export default function OurApproach() {
     <main className="font-[Playfair_Display] min-h-screen">
       <Navbar />
       <div className="w-full flex px-6 md:px-24 py-10 pb-20 gap-10 flex-col md:flex-row">
+        <div className="w-full md:w-1/3 md:hidden">
+        <Image
+          src={OurApproachImage}
+          alt="Our Approach"
+          className="w-full h-full object-cover"
+        />
+      </div>
         <div className="flex flex-col w-full md:w-2/3 gap-6">
         <div className="flex flex-col gap-6">
           <h1 className="text-3xl font-bold text-[#5b5b5b]">
@@ -39,7 +46,7 @@ export default function OurApproach() {
         </p>
         <CTA />
       </div>
-      <div className="w-full md:w-1/3">
+      <div className="hidden md:block w-full md:w-1/3">
         <Image
           src={OurApproachImage}
           alt="Our Approach"

@@ -10,25 +10,41 @@ import image6 from "../public/Group 6.png";
 import Navbar from "./components/navbar";
 import { CarouselDemo } from "./components/carousel";
 import ContactUs from "./components/contact-us";
+import CTA from "./components/cta";
 
 export default function Home() {
-
   const services = [
-    { title: "Individual Counseling for Depression", link: "#", image: image1 },
-    { title: "Child Therapy", link: "#", image: image2 },
-    { title: "Pre-Marital Counseling", link: "#", image: image3 },
-    { title: "Couples Counseling", link: "#", image: image4 },
-    { title: "Individual Therapy for Anxiety", link: "#", image: image5 },
-    { title: "Teen Therapy", link: "#", image: image6 },
+    {
+      title: "Individual Counseling",
+      link: "/services/individual-counseling",
+      image: image1,
+    },
+    { title: "Child Therapy", link: "/services/child-therapy", image: image2 },
+    {
+      title: "Marital/Pre-Marital Counseling",
+      link: "/services/marital-pre-marital-counseling",
+      image: image3,
+    },
+    {
+      title: "Couples Counseling",
+      link: "/services/couples-counseling",
+      image: image4,
+    },
+    {
+      title: "Group Therapy (Seasonal)",
+      link: "/services/group-therapy-seasonal",
+      image: image5,
+    },
+    { title: "Teen Therapy", link: "/services/teen-therapy", image: image6 },
   ];
 
   return (
     <main className="font-[Playfair_Display] bg-[#f8f8f6]">
       {/* Top Banner */}
       <div className="bg-[#e8a693] text-white text-center py-2 text-sm">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor
+        Welcome to Chizara Theraputic Services - Your Path to Healing and Growth!
       </div>
+      <button onClick={() => alert("I was clicked!")} className="px-4 py-2 bg-red-600 m-2 text-white">Click me</button>
 
       <Navbar />
 
@@ -37,12 +53,11 @@ export default function Home() {
       {/* Intro Text */}
       <section className="py-24 text-center px-6">
         <p className="text-2xl text-[#5b5b5b] max-w-3xl mx-auto mb-10">
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          accusantium doloremque
+          These are just a few of the many services we offer at Chizara
         </p>
-        <button className="bg-[#e8a693] text-white px-10 py-3 rounded-full hover:cursor-pointer">
+        <a href="/schedule-form" className="bg-[#e8a693] text-white px-10 py-3 rounded-full hover:cursor-pointer">
           CONTACT OUR THERAPIST
-        </button>
+        </a>
       </section>
 
       {/* Services Grid */}
@@ -77,12 +92,22 @@ export default function Home() {
           <h2 className="text-5xl text-[#3f4a41] mb-8">
             We Offer Primary Care For Mental And Relational Health.
           </h2>
-          <a
+          <p className="text-lg text-gray-700 mb-10">
+            Our practice provides comprehensive, client-centered support for
+            emotional and relational wellbeing. We focus on early intervention,
+            ongoing care, and personalized treatment to help individuals,
+            couples, and families navigate life’s challenges. Through
+            compassionate, evidence-based therapy, we support mental health,
+            strengthen relationships, and promote long-term healing in a safe
+            and confidential environment.
+          </p>
+          <CTA />
+          {/* <a
             href="#"
             className="bg-[#3f4a41] text-white px-10 py-3 rounded-full text-sm"
           >
             Learn More
-          </a>
+          </a> */}
         </div>
       </section>
 

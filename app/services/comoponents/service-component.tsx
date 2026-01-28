@@ -23,14 +23,14 @@ export default function ServiceComponent({
             className="w-full h-full object-cover"
           />
           <div className="absolute top-0 left-0 w-full h-full bg-black opacity-40 z-10"></div>
-          <h1 className="absolute top-20 left-30 text-4xl md:text-5xl w-[50%] font-bold text-white px-4 py-2 z-30">
+          <h1 className="absolute top-5 left-5 md:top-20 md:left-30 text-4xl md:text-5xl w-[50%] font-bold text-white px-4 py-2 z-30">
             {title}
           </h1>
         </div>
 
         <div className="w-full px-6 md:px-24 mb-16">
           <div className="my-10 w-full md:w-2/3">
-            <p className="text-lg tracking-wide leading-8">{content}</p>
+            <p className="text-xl tracking-[0.05rem] leading-8">{content}</p>
           </div>
           <CTA />
         </div>

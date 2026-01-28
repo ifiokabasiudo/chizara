@@ -1,25 +1,60 @@
+"use client";
+
+import CustomDropdown from "../schedule-form/components/dropdown";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 export default function ContactUs() {
+  const [loading, setLoading] = useState(false);
+    const router = useRouter();
+  
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+      e.preventDefault();
+      setLoading(true);
+  
+      // const formData = new FormData(e.currentTarget);
+      const form = e.currentTarget; // ✅ store reference
+      const formData = new FormData(form);
+  
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        // headers: { "Content-Type": "application/json" },
+        body: formData,
+      });
+  
+      setLoading(false);
+  
+      if (res.ok) {
+        form.reset();
+        router.push("/schedule-form/success");
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    }
+
+    const date = new Date();
+    const year = date.getFullYear();
+
   return (
     <>
       <section className="bg-[#3f4a41] text-white py-32 px-6 md:px-24">
         <div className="w-full mx-auto grid md:grid-cols-2 gap-16">
-          <div>
+          <div className="">
             <h2 className="text-3xl mb-6">Contact Us</h2>
-            <p className="text-sm leading-7 opacity-80">
-              Nemo Enim Ipsam Voluptatem Quia Voluptas Sit Aspernatur Aut Odit
-              Aut Fugit, Sed Quia Consequuntur Magni Dolores Eos Qui Ratione
-              Voluptatem Sequi Nesciunt. Neque Porro Quisquam Est, Qui Dolorem
-              Ipsum Quia Dolor Sit Amet, Consectetur, Adipisci Velit, Sed Quia
-              Non Numquam Eius Modi Tempora Incidunt Ut Labore Et Dolore Magnam
-              Aliquam Quaerat Voluptatem.
+            <p className="text-sm leading-7 opacity-80 mb-10">
+              If you’re considering therapy, taking the first step can feel
+              overwhelming. You don’t have to do it alone. We’re here to
+              answer your questions, discuss your needs, and help you determine
+              whether our services are the right fit for you. Reach out today to
+              begin your journey toward healing and emotional wellbeing.
             </p>
 
-            <button className="mt-10 border border-white px-10 py-3 rounded-full hover:cursor-pointer">
+            <a href="/schedule-form" className="border border-white px-10 py-3 rounded-full hover:cursor-pointer">
               Get In Touch With Our Therapist
-            </button>
+            </a>
           </div>
 
-          <form className="space-y-8">
+          {/* <form className="space-y-8">
             <div>
               <label className="text-sm">Name (required)</label>
               <div className="grid grid-cols-2 gap-4 mt-2">
@@ -49,11 +84,143 @@ export default function ContactUs() {
             <button className="border border-white px-12 py-3 rounded-full hover:cursor-pointer">
               SEND
             </button>
-          </form>
+          </form> */}
+          <form
+                onSubmit={handleSubmit}
+                className="space-y-6 text-white w-full bg-[#3f4a41]"
+              >
+                <h1 className="text-3xl mb-5">Schedule a Consultation</h1>
+                {/* NAME */}
+                <div>
+                  <label className="block mb-2">Name (required)</label>
+                  <div className="flex gap-4">
+                    <input
+                      name="firstName"
+                      required
+                      placeholder="First Name"
+                      className="w-full rounded-full px-4 py-3 bg-transparent border"
+                    />
+                    <input
+                      name="lastName"
+                      required
+                      placeholder="Last Name"
+                      className="w-full rounded-full px-4 py-3 bg-transparent border"
+                    />
+                  </div>
+                </div>
+          
+                {/* EMAIL */}
+                <div>
+                  <label className="block mb-2">Email (required)</label>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    className="w-full rounded-full px-4 py-3 bg-transparent border"
+                  />
+                </div>
+          
+                {/* PHONE */}
+                <div>
+                  <label className="block mb-2">Phone Number</label>
+                  <input
+                    name="phone"
+                    className="w-full rounded-full px-4 py-3 bg-transparent border"
+                  />
+                </div>
+          
+                {/* SERVICE */}
+                <div>
+                  {/* <label className="block mb-2">Service of Interest</label> */}
+                  {/* <select
+                    name="service"
+                    required
+                    className="w-full rounded-full px-4 py-3 bg-[#3f4a41] border"
+                  >
+                    <option value="">Select a service</option>
+                    <option>Individual Counseling</option>
+                    <option>Child Therapy</option>
+                    <option>Teen Therapy</option>
+                    <option>Couples Counseling</option>
+                    <option>Marital / Pre-Marital Counseling</option>
+                    <option>Group Therapy</option>
+                  </select> */}
+                  <CustomDropdown
+                    label="Service of Interest"
+                    name="service"
+                    required
+                    placeholder="Select a service"
+                    options={[
+                      { label: "Individual Counseling", value: "individual" },
+                      { label: "Child Therapy", value: "child" },
+                      { label: "Teen Therapy", value: "teen" },
+                      { label: "Couples Counseling", value: "couples" },
+                      { label: "Marital / Pre-Marital Counseling", value: "marital" },
+                      { label: "Group Therapy (Seasonal)", value: "group" },
+                    ]}
+                  />
+                </div>
+          
+                {/* MEETING TYPE */}
+                <div>
+                  {/* <label className="block mb-2">Preferred Session Type</label>
+                  <select
+                    name="meetingType"
+                    required
+                    className="w-full rounded-full px-4 py-3 bg-[#3f4a41] border"
+                  >
+                    <option value="">Select one</option>
+                    <option>Virtual</option>
+                    <option>Phone</option>
+                  </select> */}
+                  <CustomDropdown
+                    label="Preferred Session Type"
+                    name="meetingType"
+                    required
+                    placeholder="Select session type"
+                    options={[
+                      { label: "Virtual Session", value: "virtual" },
+                      { label: "Phone Session", value: "phone" },
+                    ]}
+                  />
+                </div>
+          
+                {/* AVAILABILITY */}
+                <div>
+                  <label className="block mb-2">Availability (days & times)</label>
+                  <textarea
+                    name="availability"
+                    required
+                    rows={4}
+                    className="w-full rounded-2xl px-4 py-3 bg-transparent border"
+                    placeholder="Example: Mondays & Wednesdays after 5pm"
+                  />
+                </div>
+          
+                {/* MESSAGE */}
+                <div>
+                  <label className="block mb-2">What questions do you have for us?</label>
+                  <textarea
+                    name="message"
+                    // required
+                    rows={5}
+                    className="w-full rounded-2xl px-4 py-3 bg-transparent border"
+                  />
+                </div>
+          
+                {/* SUBMIT */}
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="rounded-full px-10 py-3 border hover:bg-white hover:text-black transition hover:cursor-pointer"
+                >
+                  {loading ? "Sending..." : "Send"}
+                </button>
+              </form>
         </div>
       </section>
       <footer className="bg-[#3f4a41] text-white text-center py-6 text-xs">
-        Copyright © 2025 Chizara Therapeutic Services. All Rights Reserved.
+        Copyright © {year} Chizara Therapeutic Services. All Rights Reserved.
       </footer>
     </>
   );

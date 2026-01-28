@@ -159,6 +159,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import logoSm from "../../public/logo-sm.png";
+import { useRouter } from "next/navigation";
 
 const aboutItems = [
   { name: "Practice Overview", link: "/about/practice-overview" },
@@ -194,6 +195,8 @@ export default function Navbar() {
   const aboutRef = useRef<HTMLDivElement | null>(null);
   const servicesRef = useRef<HTMLDivElement | null>(null);
 
+  const router = useRouter();
+
   // useEffect(() => {
   //   function handleClickOutside(e: MouseEvent) {
   //     const target = e.target as Node;
@@ -228,7 +231,7 @@ export default function Navbar() {
     <header className="w-full bg-white border-b">
       <div className="mx-auto max-w-7xl px-4 md:px-10 py-5 flex items-center justify-between">
         {/* LOGO */}
-        <div className="flex items-center gap-2">
+        <div onClick={() => router.push("/")} className="flex items-center gap-2 hover:cursor-pointer">
           <Image
             src={logoSm}
             alt="Chizara logo"

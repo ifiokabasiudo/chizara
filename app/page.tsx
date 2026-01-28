@@ -44,7 +44,7 @@ export default function Home() {
       <div className="bg-[#e8a693] text-white text-center py-2 text-sm">
         Welcome to Chizara Theraputic Services - Your Path to Healing and Growth!
       </div>
-      <button onClick={() => alert("I was clicked!")} className="px-4 py-2 bg-red-600 m-2 text-white">Click me</button>
+      {/* <button onClick={() => alert("I was clicked!")} className="px-4 py-2 bg-red-600 m-2 text-white">Click me</button> */}
 
       <Navbar />
 

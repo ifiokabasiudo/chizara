@@ -288,6 +288,8 @@ type Props = {
   placeholder?: string;
   required?: boolean;
   onChange?: (value: string) => void;
+  setIsGroupTherapy: React.Dispatch<React.SetStateAction<string>>;
+  isGroupModal: boolean;
 };
 
 export default function CustomDropdown({
@@ -297,10 +299,14 @@ export default function CustomDropdown({
   placeholder = "Select an option",
   required,
   onChange,
+  setIsGroupTherapy,
+  isGroupModal,
 }: Props) {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<Option | null>(null);
   const ref = useRef<HTMLDivElement | null>(null);
+
+  console.log("The group modal? ", isGroupModal);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -310,12 +316,19 @@ export default function CustomDropdown({
     }
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () =>
-      document.removeEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   function handleSelect(option: Option) {
     setSelected(option);
+    if (isGroupModal) {
+      if (option.value === "group") {
+        setIsGroupTherapy("group");
+      } else {
+        console.log("CLEARING GROUP");
+        setIsGroupTherapy("");
+      }
+    }
     setOpen(false);
     onChange?.(option.value);
   }
@@ -329,7 +342,9 @@ export default function CustomDropdown({
       {/* Trigger */}
       <button
         type="button"
-        onClick={() => setOpen(prev => !prev)}
+        onClick={() => {
+          setOpen((prev) => !prev);
+        }}
         className="
           w-full
           rounded-full
@@ -378,11 +393,13 @@ export default function CustomDropdown({
             overflow-hidden
           "
         >
-          {options.map(option => (
+          {options.map((option) => (
             <button
               key={option.value}
               type="button"
-              onClick={() => handleSelect(option)}
+              onClick={() => {
+                handleSelect(option);
+              }}
               className="
                 w-full
                 text-left

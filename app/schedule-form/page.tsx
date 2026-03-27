@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 export default function ContactForm() {
   const [loading, setLoading] = useState(false);
+  const [isGroupTherapy, setIsGroupTherapy] = useState("");
   const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -14,6 +15,12 @@ export default function ContactForm() {
     // const formData = new FormData(e.currentTarget);
     const form = e.currentTarget; // ✅ store reference
     const formData = new FormData(form);
+
+    if (formData.get("service") === "group" && !formData.get("groupType")) {
+      alert("Please select a group therapy type.");
+      setLoading(false);
+      return;
+    }
 
     const res = await fetch("/api/contact", {
       method: "POST",
@@ -78,20 +85,6 @@ export default function ContactForm() {
 
       {/* SERVICE */}
       <div>
-        {/* <label className="block mb-2">Service of Interest</label> */}
-        {/* <select
-          name="service"
-          required
-          className="w-full rounded-full px-4 py-3 bg-[#3f4a41] border"
-        >
-          <option value="">Select a service</option>
-          <option>Individual Counseling</option>
-          <option>Child Therapy</option>
-          <option>Teen Therapy</option>
-          <option>Couples Counseling</option>
-          <option>Marital / Pre-Marital Counseling</option>
-          <option>Group Therapy</option>
-        </select> */}
         <CustomDropdown
           label="Service of Interest"
           name="service"
@@ -99,27 +92,42 @@ export default function ContactForm() {
           placeholder="Select a service"
           options={[
             { label: "Individual Counseling", value: "individual" },
-            { label: "Child Therapy", value: "child" },
+            // { label: "Child Therapy", value: "child" },
             { label: "Teen Therapy", value: "teen" },
             { label: "Couples Counseling", value: "couples" },
             { label: "Marital / Pre-Marital Counseling", value: "marital" },
             { label: "Group Therapy (Seasonal)", value: "group" },
           ]}
+          setIsGroupTherapy={setIsGroupTherapy}
+          isGroupModal={true}
         />
       </div>
 
+      <div className="flex justify-between gap-5">
+        {(isGroupTherapy === "group" ||
+          ["Grief", "Parents", "Divorcee"].includes(isGroupTherapy)) &&
+          ["Grief", "Parents", "Divorcee"].map((item, index) => (
+            <div
+              key={index}
+              onClick={() => setIsGroupTherapy(item)}
+              className={`w-full rounded-full border py-3 text-center cursor-pointer ${isGroupTherapy == item && `bg-white text-[#3f4a41]`}`}
+            >
+              {item}
+            </div>
+          ))}
+      </div>
+      <input
+        type="hidden"
+        name="groupType"
+        value={
+          ["Grief", "Parents", "Divorcee"].includes(isGroupTherapy)
+            ? isGroupTherapy
+            : ""
+        }
+      />
+
       {/* MEETING TYPE */}
       <div>
-        {/* <label className="block mb-2">Preferred Session Type</label>
-        <select
-          name="meetingType"
-          required
-          className="w-full rounded-full px-4 py-3 bg-[#3f4a41] border"
-        >
-          <option value="">Select one</option>
-          <option>Virtual</option>
-          <option>Phone</option>
-        </select> */}
         <CustomDropdown
           label="Preferred Session Type"
           name="meetingType"
@@ -129,6 +137,8 @@ export default function ContactForm() {
             { label: "Virtual Session", value: "virtual" },
             { label: "Phone Session", value: "phone" },
           ]}
+          setIsGroupTherapy={() => {}}
+          isGroupModal={false}
         />
       </div>
 
@@ -154,6 +164,12 @@ export default function ContactForm() {
           className="w-full rounded-2xl px-4 py-3 bg-transparent border"
         />
       </div>
+
+      <p className="text-sm text-gray-300 mt-6 max-w-md">
+        * Please note: Chizara Therapeutic Services is a private-pay practice
+        and does not accept insurance. Superbills are available upon request for
+        possible reimbursement.
+      </p>
 
       {/* SUBMIT */}
       <button

@@ -9,6 +9,7 @@ interface EmailLayoutProps {
   phone: string;
   availability: string;
   message: string;
+  groupType: string;
 }
 
 export function EmailLayout({
@@ -20,6 +21,7 @@ export function EmailLayout({
   phone,
   availability,
   message,
+  groupType,
 }: EmailLayoutProps) {
   return (
     <div>
@@ -39,6 +41,11 @@ export function EmailLayout({
       <p>
         <strong>Service:</strong> {service}
       </p>
+      {groupType !== "none" && (
+        <p>
+          <strong>Service:</strong> {groupType}
+        </p>
+      )}
       <p>
         <strong>Meeting Type:</strong> {meetingType}
       </p>

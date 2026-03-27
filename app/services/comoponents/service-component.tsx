@@ -7,10 +7,12 @@ export default function ServiceComponent({
   title,
   image,
   content,
+  extra,
 }: {
   title: string;
   image: any;
   content: string;
+  extra? : React.ReactNode
 }) {
   return (
     <main className="font-[Playfair_Display] min-h-screen">
@@ -31,6 +33,7 @@ export default function ServiceComponent({
         <div className="w-full px-6 md:px-24 mb-16">
           <div className="my-10 w-full md:w-2/3">
             <p className="text-xl tracking-[0.05rem] leading-8">{content}</p>
+            {extra}
           </div>
           <CTA />
         </div>

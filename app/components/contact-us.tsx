@@ -6,34 +6,41 @@ import { useRouter } from "next/navigation";
 
 export default function ContactUs() {
   const [loading, setLoading] = useState(false);
-    const router = useRouter();
-  
-    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-      e.preventDefault();
-      setLoading(true);
-  
-      // const formData = new FormData(e.currentTarget);
-      const form = e.currentTarget; // ✅ store reference
-      const formData = new FormData(form);
-  
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        // headers: { "Content-Type": "application/json" },
-        body: formData,
-      });
-  
+  const [isGroupTherapy, setIsGroupTherapy] = useState("");
+  const router = useRouter();
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setLoading(true);
+
+    // const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget; // ✅ store reference
+    const formData = new FormData(form);
+
+    if (formData.get("service") === "group" && !formData.get("groupType")) {
+      alert("Please select a group therapy type.");
       setLoading(false);
-  
-      if (res.ok) {
-        form.reset();
-        router.push("/schedule-form/success");
-      } else {
-        alert("Something went wrong. Please try again.");
-      }
+      return;
     }
 
-    const date = new Date();
-    const year = date.getFullYear();
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      // headers: { "Content-Type": "application/json" },
+      body: formData,
+    });
+
+    setLoading(false);
+
+    if (res.ok) {
+      form.reset();
+      router.push("/schedule-form/success");
+    } else {
+      alert("Something went wrong. Please try again.");
+    }
+  }
+
+  const date = new Date();
+  const year = date.getFullYear();
 
   return (
     <>
@@ -43,13 +50,16 @@ export default function ContactUs() {
             <h2 className="text-3xl mb-6">Contact Us</h2>
             <p className="text-sm leading-7 opacity-80 mb-10">
               If you’re considering therapy, taking the first step can feel
-              overwhelming. You don’t have to do it alone. We’re here to
-              answer your questions, discuss your needs, and help you determine
-              whether our services are the right fit for you. Reach out today to
-              begin your journey toward healing and emotional wellbeing.
+              overwhelming. You don’t have to do it alone. We’re here to answer
+              your questions, discuss your needs, and help you determine whether
+              our services are the right fit for you. Reach out today to begin
+              your journey toward healing and emotional wellbeing.
             </p>
 
-            <a href="/schedule-form" className="border border-white px-10 py-3 rounded-full hover:cursor-pointer">
+            <a
+              href="/schedule-form"
+              className="border border-white px-10 py-3 rounded-full hover:cursor-pointer"
+            >
               Get In Touch With Our Therapist
             </a>
           </div>
@@ -86,53 +96,53 @@ export default function ContactUs() {
             </button>
           </form> */}
           <form
-                onSubmit={handleSubmit}
-                className="space-y-6 text-white w-full bg-[#3f4a41]"
-              >
-                <h1 className="text-3xl mb-5">Schedule a Consultation</h1>
-                {/* NAME */}
-                <div>
-                  <label className="block mb-2">Name (required)</label>
-                  <div className="flex gap-4">
-                    <input
-                      name="firstName"
-                      required
-                      placeholder="First Name"
-                      className="w-full rounded-full px-4 py-3 bg-transparent border"
-                    />
-                    <input
-                      name="lastName"
-                      required
-                      placeholder="Last Name"
-                      className="w-full rounded-full px-4 py-3 bg-transparent border"
-                    />
-                  </div>
-                </div>
-          
-                {/* EMAIL */}
-                <div>
-                  <label className="block mb-2">Email (required)</label>
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    className="w-full rounded-full px-4 py-3 bg-transparent border"
-                  />
-                </div>
-          
-                {/* PHONE */}
-                <div>
-                  <label className="block mb-2">Phone Number</label>
-                  <input
-                    name="phone"
-                    className="w-full rounded-full px-4 py-3 bg-transparent border"
-                  />
-                </div>
-          
-                {/* SERVICE */}
-                <div>
-                  {/* <label className="block mb-2">Service of Interest</label> */}
-                  {/* <select
+            onSubmit={handleSubmit}
+            className="space-y-6 text-white w-full bg-[#3f4a41]"
+          >
+            <h1 className="text-3xl mb-5">Schedule a Consultation</h1>
+            {/* NAME */}
+            <div>
+              <label className="block mb-2">Name (required)</label>
+              <div className="flex gap-4">
+                <input
+                  name="firstName"
+                  required
+                  placeholder="First Name"
+                  className="w-full rounded-full px-4 py-3 bg-transparent border"
+                />
+                <input
+                  name="lastName"
+                  required
+                  placeholder="Last Name"
+                  className="w-full rounded-full px-4 py-3 bg-transparent border"
+                />
+              </div>
+            </div>
+
+            {/* EMAIL */}
+            <div>
+              <label className="block mb-2">Email (required)</label>
+              <input
+                type="email"
+                name="email"
+                required
+                className="w-full rounded-full px-4 py-3 bg-transparent border"
+              />
+            </div>
+
+            {/* PHONE */}
+            <div>
+              <label className="block mb-2">Phone Number</label>
+              <input
+                name="phone"
+                className="w-full rounded-full px-4 py-3 bg-transparent border"
+              />
+            </div>
+
+            {/* SERVICE */}
+            <div>
+              {/* <label className="block mb-2">Service of Interest</label> */}
+              {/* <select
                     name="service"
                     required
                     className="w-full rounded-full px-4 py-3 bg-[#3f4a41] border"
@@ -145,25 +155,57 @@ export default function ContactUs() {
                     <option>Marital / Pre-Marital Counseling</option>
                     <option>Group Therapy</option>
                   </select> */}
-                  <CustomDropdown
-                    label="Service of Interest"
-                    name="service"
-                    required
-                    placeholder="Select a service"
-                    options={[
-                      { label: "Individual Counseling", value: "individual" },
-                      { label: "Child Therapy", value: "child" },
-                      { label: "Teen Therapy", value: "teen" },
-                      { label: "Couples Counseling", value: "couples" },
-                      { label: "Marital / Pre-Marital Counseling", value: "marital" },
-                      { label: "Group Therapy (Seasonal)", value: "group" },
-                    ]}
-                  />
-                </div>
-          
-                {/* MEETING TYPE */}
-                <div>
-                  {/* <label className="block mb-2">Preferred Session Type</label>
+              <CustomDropdown
+                label="Service of Interest"
+                name="service"
+                required
+                placeholder="Select a service"
+                options={[
+                  { label: "Individual Counseling", value: "individual" },
+                  { label: "Child Therapy", value: "child" },
+                  { label: "Teen Therapy", value: "teen" },
+                  { label: "Couples Counseling", value: "couples" },
+                  {
+                    label: "Marital / Pre-Marital Counseling",
+                    value: "marital",
+                  },
+                  { label: "Group Therapy (Seasonal)", value: "group" },
+                ]}
+                setIsGroupTherapy={setIsGroupTherapy}
+                isGroupModal={true}
+              />
+            </div>
+
+            <div className="flex justify-between gap-5">
+              {(isGroupTherapy === "group" ||
+                ["Grief", "New Parents Support", "Divorcee"].includes(
+                  isGroupTherapy,
+                )) &&
+                ["Grief", "New Parents Support", "Divorcee"].map(
+                  (item, index) => (
+                    <div
+                      key={index}
+                      onClick={() => setIsGroupTherapy(item)}
+                      className={`w-full rounded-full border py-3 text-center cursor-pointer ${isGroupTherapy == item && `bg-white text-[#3f4a41]`}`}
+                    >
+                      {item}
+                    </div>
+                  ),
+                )}
+            </div>
+            <input
+              type="hidden"
+              name="groupType"
+              value={
+                ["Grief", "Parents", "Divorcee"].includes(isGroupTherapy)
+                  ? isGroupTherapy
+                  : ""
+              }
+            />
+
+            {/* MEETING TYPE */}
+            <div>
+              {/* <label className="block mb-2">Preferred Session Type</label>
                   <select
                     name="meetingType"
                     required
@@ -173,50 +215,60 @@ export default function ContactUs() {
                     <option>Virtual</option>
                     <option>Phone</option>
                   </select> */}
-                  <CustomDropdown
-                    label="Preferred Session Type"
-                    name="meetingType"
-                    required
-                    placeholder="Select session type"
-                    options={[
-                      { label: "Virtual Session", value: "virtual" },
-                      { label: "Phone Session", value: "phone" },
-                    ]}
-                  />
-                </div>
-          
-                {/* AVAILABILITY */}
-                <div>
-                  <label className="block mb-2">Availability (days & times)</label>
-                  <textarea
-                    name="availability"
-                    required
-                    rows={4}
-                    className="w-full rounded-2xl px-4 py-3 bg-transparent border"
-                    placeholder="Example: Mondays & Wednesdays after 5pm"
-                  />
-                </div>
-          
-                {/* MESSAGE */}
-                <div>
-                  <label className="block mb-2">What questions do you have for us?</label>
-                  <textarea
-                    name="message"
-                    // required
-                    rows={5}
-                    className="w-full rounded-2xl px-4 py-3 bg-transparent border"
-                  />
-                </div>
-          
-                {/* SUBMIT */}
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="rounded-full px-10 py-3 border hover:bg-white hover:text-black transition hover:cursor-pointer"
-                >
-                  {loading ? "Sending..." : "Send"}
-                </button>
-              </form>
+              <CustomDropdown
+                label="Preferred Session Type"
+                name="meetingType"
+                required
+                placeholder="Select session type"
+                options={[
+                  { label: "Virtual Session", value: "virtual" },
+                  { label: "Phone Session", value: "phone" },
+                ]}
+                setIsGroupTherapy={() => {}}
+                isGroupModal={false}
+              />
+            </div>
+
+            {/* AVAILABILITY */}
+            <div>
+              <label className="block mb-2">Availability (days & times)</label>
+              <textarea
+                name="availability"
+                required
+                rows={4}
+                className="w-full rounded-2xl px-4 py-3 bg-transparent border"
+                placeholder="Example: Mondays & Wednesdays after 5pm"
+              />
+            </div>
+
+            {/* MESSAGE */}
+            <div>
+              <label className="block mb-2">
+                What questions do you have for us?
+              </label>
+              <textarea
+                name="message"
+                // required
+                rows={5}
+                className="w-full rounded-2xl px-4 py-3 bg-transparent border"
+              />
+            </div>
+
+            <p className="text-sm text-gray-300 mt-6 max-w-md">
+              * Please note: Chizara Therapeutic Services is a private-pay
+              practice and does not accept insurance. Superbills are available
+              upon request for possible reimbursement.
+            </p>
+
+            {/* SUBMIT */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="rounded-full px-10 py-3 border hover:bg-white hover:text-black transition hover:cursor-pointer"
+            >
+              {loading ? "Sending..." : "Send"}
+            </button>
+          </form>
         </div>
       </section>
       <footer className="bg-[#3f4a41] text-white text-center py-6 text-xs">

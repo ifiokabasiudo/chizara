@@ -169,7 +169,7 @@ const aboutItems = [
 
 const serviceItems = [
   { name: "Individual Counseling", link: "/services/individual-counseling" },
-  { name: "Child Therapy", link: "/services/child-therapy" },
+  // { name: "Child Therapy", link: "/services/child-therapy" },
   {
     name: "Marital/Pre-Marital Counseling",
     link: "/services/marital-pre-marital-counseling",
@@ -179,7 +179,7 @@ const serviceItems = [
     name: "Group Therapy (Seasonal)",
     link: "/services/group-therapy-seasonal",
   },
-  { name: "Teen Therapy", link: "/services/teen-therapy" },
+  { name: "Teen Therapy (12+)", link: "/services/teen-therapy" },
 ];
 
 export default function Navbar() {

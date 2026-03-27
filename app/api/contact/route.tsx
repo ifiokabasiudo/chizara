@@ -20,6 +20,7 @@ export async function POST(req: Request) {
   const phone = formData.get("phone")?.toString() || "N/A";
   const availability = formData.get("availability")?.toString();
   const message = formData.get("message")?.toString() || "none";
+  const groupType = formData.get("groupType")?.toString() || "none";
 
   console.log("It reached here 1...");
 
@@ -54,6 +55,7 @@ export async function POST(req: Request) {
         phone={phone}
         availability={availability}
         message={message}
+        groupType={groupType}
       />,
     );
 

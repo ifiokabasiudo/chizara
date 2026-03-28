@@ -4,7 +4,7 @@ export default function GroupTypes() {
       title: "Grief Group",
       content:
         "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quisquam accusantium perferendis voluptatibus est quasi, autem dolores corporis quo, temporibus exercitationem sapiente accusamus porro eveniet, recusandae laboriosam similique pariatur. Facere, delectus!",
-      availableDate: "(Available Every November)",
+      availableDate: "(Available November through January)",
     },
     {
       title: "New Parents Support Group",

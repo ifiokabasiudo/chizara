@@ -20,7 +20,7 @@ export default function Home() {
       link: "/services/individual-counseling",
       image: image1,
     },
-    { title: "Child Therapy", link: "/services/child-therapy", image: image2 },
+    // { title: "Child Therapy", link: "/services/child-therapy", image: image2 },
     {
       title: "Marital/Pre-Marital Counseling",
       link: "/services/marital-pre-marital-counseling",
@@ -36,7 +36,7 @@ export default function Home() {
       link: "/services/group-therapy-seasonal",
       image: image5,
     },
-    { title: "Teen Therapy", link: "/services/teen-therapy", image: image6 },
+    { title: "Adolescence Therapy (12+)", link: "/services/teen-therapy", image: image6 },
   ];
 
   return (

@@ -179,7 +179,7 @@ const serviceItems = [
     name: "Group Therapy (Seasonal)",
     link: "/services/group-therapy-seasonal",
   },
-  { name: "Teen Therapy (12+)", link: "/services/teen-therapy" },
+  { name: "Adolescence Therapy (12+)", link: "/services/teen-therapy" },
 ];
 
 export default function Navbar() {

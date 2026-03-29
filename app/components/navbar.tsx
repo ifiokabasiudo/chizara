@@ -180,6 +180,7 @@ const serviceItems = [
     link: "/services/group-therapy-seasonal",
   },
   { name: "Adolescence Therapy (12+)", link: "/services/teen-therapy" },
+  { name: "Supervision Services", link: "/services/supervision-services" },
 ];
 
 export default function Navbar() {

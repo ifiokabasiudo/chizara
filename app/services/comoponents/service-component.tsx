@@ -11,8 +11,8 @@ export default function ServiceComponent({
 }: {
   title: string;
   image: any;
-  content: string;
-  extra? : React.ReactNode
+  content: React.ReactNode;
+  extra?: React.ReactNode;
 }) {
   return (
     <main className="font-[Playfair_Display] min-h-screen">
@@ -31,11 +31,20 @@ export default function ServiceComponent({
         </div>
 
         <div className="w-full px-6 md:px-24 mb-16">
-          <div className="my-10 w-full md:w-2/3">
-            <p className="text-xl tracking-[0.05rem] leading-8">{content}</p>
+          <div className="my-10 w-full md:w-2/3 text-xl tracking-[0.05rem] leading-8">
+            {content}
             {extra}
           </div>
-          <CTA />
+          {title != "Supervision services" ? (
+            <CTA />
+          ) : (
+            <a
+              href="/supervision-form"
+              className="px-6 py-3 rounded-full bg-[#3f4a41] text-white w-fit text-lg hover:cursor-pointer"
+            >
+              Request Supervision
+            </a>
+          )}
         </div>
       </div>
       <ContactUs />

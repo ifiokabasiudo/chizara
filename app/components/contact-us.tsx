@@ -100,6 +100,9 @@ export default function ContactUs() {
             className="space-y-6 text-white w-full bg-[#3f4a41]"
           >
             <h1 className="text-3xl mb-5">Schedule a Consultation</h1>
+            <p className="text-sm text-gray-300 max-w-md mb-6">
+              * Services are currently available to Maryland residents only.
+            </p>
             {/* NAME */}
             <div>
               <label className="block mb-2">Name (required)</label>

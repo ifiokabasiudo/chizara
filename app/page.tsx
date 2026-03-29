@@ -37,6 +37,7 @@ export default function Home() {
       image: image5,
     },
     { title: "Adolescence Therapy (12+)", link: "/services/teen-therapy", image: image6 },
+    { title: "Supervision Services", link: "/services/supervision-services", image: image2 },
   ];
 
   return (
@@ -62,7 +63,7 @@ export default function Home() {
       </section>
 
       {/* Services Grid */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-24 max-w-6xl mx-auto text-center pb-32 px-6">
+      <section className="grid grid-cols-1  md:grid-cols-3 gap-24 max-w-6xl mx-auto text-center pb-32 px-6">
         {services.map((service, i) => (
           <div key={i} className="flex flex-col items-center">
             <div className="relative flex justify-center items-center mb-6 w-44 h-44">

@@ -9,7 +9,7 @@ console.log("Receiver email is:", receiverEmail);
 
 export async function POST(req: Request) {
   console.log("Receiver email is:", receiverEmail);
-  
+
   const formData = await req.formData();
 
   const firstName = formData.get("firstName")?.toString();
@@ -21,20 +21,37 @@ export async function POST(req: Request) {
   const availability = formData.get("availability")?.toString();
   const message = formData.get("message")?.toString() || "none";
   const groupType = formData.get("groupType")?.toString() || "none";
+  const formType = formData.get("formType")?.toString();
+
+  // supervision fields
+  const licenseStatus = formData.get("licenseStatus")?.toString();
+  const location = formData.get("location")?.toString() || "N/A";
+  const goals = formData.get("goals")?.toString() || "Not provided";
 
   console.log("It reached here 1...");
 
-  if (
-    !firstName ||
-    !email ||
-    !lastName ||
-    !service ||
-    !message ||
-    !meetingType ||
-    !availability ||
-    !phone
-  ) {
-    return Response.json({ error: "Missing required fields" }, { status: 400 });
+  if (formType === "supervision") {
+    if (!firstName || !lastName || !email || !licenseStatus || !availability) {
+      return Response.json(
+        { error: "Missing required fields" },
+        { status: 400 },
+      );
+    }
+  } else {
+    // default = therapy form
+    if (
+      !firstName ||
+      !email ||
+      !lastName ||
+      !service ||
+      !meetingType ||
+      !availability
+    ) {
+      return Response.json(
+        { error: "Missing required fields" },
+        { status: 400 },
+      );
+    }
   }
 
   try {
@@ -47,25 +64,34 @@ export async function POST(req: Request) {
 
     const html = await render(
       <EmailLayout
+        type={formType}
         firstName={firstName}
         lastName={lastName}
         email={email}
+        availability={availability}
+        // therapy
         service={service}
         meetingType={meetingType}
         phone={phone}
-        availability={availability}
         message={message}
         groupType={groupType}
+        // supervision
+        licenseStatus={licenseStatus}
+        location={location}
+        goals={goals}
       />,
     );
 
-    console.log("Here too");
+    const subject =
+  formType === "supervision"
+    ? `New Supervision Request from ${firstName} ${lastName}`
+    : `New Therapy Appointment Request from ${firstName} ${lastName}`;
 
     const { data, error } = await resend.emails.send({
       from: "onboarding@resend.dev",
       to: receiverEmail,
       replyTo: email,
-      subject: `New Therapy Appointment Request from ${firstName} ${lastName}`,
+      subject,
       html,
     });
 

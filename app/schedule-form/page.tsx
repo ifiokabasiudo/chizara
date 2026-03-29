@@ -44,6 +44,9 @@ export default function ContactForm() {
       className="space-y-6 text-white w-full bg-[#3f4a41] p-8 md:p-20"
     >
       <h1 className="text-5xl mb-15">Schedule a Consultation</h1>
+      <p className="text-sm text-gray-300 max-w-md mb-6">
+        * Services are currently available to Maryland residents only.
+      </p>
       {/* NAME */}
       <div>
         <label className="block mb-2">Name (required)</label>

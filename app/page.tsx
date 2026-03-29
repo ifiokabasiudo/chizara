@@ -58,7 +58,7 @@ export default function Home() {
           These are just a few of the many services we offer at Chizara
         </p>
         <a href="/schedule-form" className="bg-[#e8a693] text-white px-10 py-3 rounded-full hover:cursor-pointer">
-          CONTACT OUR THERAPIST
+          CONTACT US
         </a>
       </section>
 

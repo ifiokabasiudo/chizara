@@ -82,7 +82,7 @@ export async function POST(req: Request) {
     : `New Therapy Appointment Request from ${firstName} ${lastName}`;
 
     const { data, error } = await resend.emails.send({
-      from: "onboarding@resend.dev",
+      from: "info@chizarats.com",
       to: receiverEmail,
       replyTo: email,
       subject,

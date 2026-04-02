@@ -5,11 +5,7 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 const receiverEmail = process.env.BOOKING_EMAIL;
 
-console.log("Receiver email is:", receiverEmail);
-
 export async function POST(req: Request) {
-  console.log("Receiver email is:", receiverEmail);
-
   const formData = await req.formData();
 
   const firstName = formData.get("firstName")?.toString();
@@ -27,9 +23,7 @@ export async function POST(req: Request) {
   const licenseStatus = formData.get("licenseStatus")?.toString();
   const location = formData.get("location")?.toString() || "N/A";
   const goals = formData.get("goals")?.toString() || "Not provided";
-
-  console.log("It reached here 1...");
-
+  
   if (formType === "supervision") {
     if (!firstName || !lastName || !email || !licenseStatus || !availability) {
       return Response.json(

@@ -306,7 +306,6 @@ export default function CustomDropdown({
   const [selected, setSelected] = useState<Option | null>(null);
   const ref = useRef<HTMLDivElement | null>(null);
 
-  console.log("The group modal? ", isGroupModal);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {

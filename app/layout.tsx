@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Tinos } from "next/font/google";
 import "./globals.css";
 import ZocdocButton from "@/components/zocdoc/ZocdocButton";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,8 +16,8 @@ const geistMono = Geist_Mono({
 
 const tinos = Tinos({
   subsets: ["latin"],
-  weight: "400"
-}) 
+  weight: "400",
+});
 
 export const metadata: Metadata = {
   title: "Chizara Theraputic Services",
@@ -35,6 +36,20 @@ export default function RootLayout({
       >
         {children}
         <ZocdocButton />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-P4039N5D9N"
+          strategy="afterInteractive"
+        />
+
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            window.gtag = gtag;
+            gtag('js', new Date());
+            gtag('config', 'G-P4039N5D9N');
+          `}
+        </Script>
       </body>
     </html>
   );

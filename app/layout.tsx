@@ -20,8 +20,8 @@ const tinos = Tinos({
 });
 
 export const metadata: Metadata = {
-  title: "Chizara Theraputic Services",
-  description: "Chizara Theraputic Services - Your Path to Healing and Growth",
+  title: "Chizara Therapeutic Services",
+  description: "Chizara Therapeutic Services - Your Path to Healing and Growth",
 };
 
 export default function RootLayout({

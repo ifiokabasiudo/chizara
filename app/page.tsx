@@ -44,7 +44,7 @@ export default function Home() {
     <main className="font-[Playfair_Display] bg-[#f8f8f6]">
       {/* Top Banner */}
       <div className="bg-[#e8a693] text-white text-center py-2">
-        Welcome to Chizara Theraputic Services - Your Path to Healing and Growth!
+        Welcome to Chizara Therapeutic Services - Your Path to Healing and Growth!
       </div>
       {/* <button onClick={() => alert("I was clicked!")} className="px-4 py-2 bg-red-600 m-2 text-white">Click me</button> */}
 

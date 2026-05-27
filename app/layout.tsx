@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Tinos } from "next/font/google";
 import "./globals.css";
-import ZocdocButton from "@/components/zocdoc/ZocdocButton";
+// import ZocdocButton from "@/components/zocdoc/ZocdocButton";
 import Script from "next/script";
 
 const geistSans = Geist({
@@ -35,7 +35,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${tinos.className} antialiased`}
       >
         {children}
-        <ZocdocButton />
+        {/* <ZocdocButton /> */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-P4039N5D9N"
           strategy="afterInteractive"

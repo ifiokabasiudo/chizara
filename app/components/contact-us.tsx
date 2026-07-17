@@ -227,7 +227,7 @@ export default function ContactUs() {
                   { label: "Virtual Session", value: "virtual" },
                   { label: "Phone Session", value: "phone" },
                 ]}
-                setIsGroupTherapy={() => {}}
+                setIsGroupTherapy={() => { }}
                 isGroupModal={false}
               />
             </div>
@@ -258,9 +258,9 @@ export default function ContactUs() {
             </div>
 
             <p className="text-sm text-gray-300 mt-6 max-w-md">
-              * Please note: Chizara Therapeutic Services is a private-pay
-              practice and does not accept insurance. Superbills are available
-              upon request for possible reimbursement.
+              * Chizara Therapeutic Services currently accepts Private Pay and United
+              Healthcare Insurance. Superbills are also available upon request for
+              possible reimbursement when applicable.
             </p>
 
             {/* SUBMIT */}

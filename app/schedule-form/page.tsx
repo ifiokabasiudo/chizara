@@ -44,7 +44,10 @@ export default function ContactForm() {
       className="space-y-6 text-white w-full bg-[#3f4a41] p-8 md:p-20"
     >
       <h1 className="text-5xl mb-15">Schedule a Consultation</h1>
-      
+      <p className="text-sm text-gray-300 max-w-md mb-6">
+        * Services are currently available to Maryland residents only.
+      </p>
+
       {/* NAME */}
       <div>
         <label className="block mb-2">Name (required)</label>
@@ -138,7 +141,7 @@ export default function ContactForm() {
             { label: "Virtual Session", value: "virtual" },
             { label: "Phone Session", value: "phone" },
           ]}
-          setIsGroupTherapy={() => {}}
+          setIsGroupTherapy={() => { }}
           isGroupModal={false}
         />
       </div>
@@ -167,9 +170,9 @@ export default function ContactForm() {
       </div>
 
       <p className="text-sm text-gray-300 mt-6 max-w-md">
-        * Please note: Chizara Therapeutic Services is a private-pay practice
-        and does not accept insurance. Superbills are available upon request for
-        possible reimbursement.
+        * Chizara Therapeutic Services currently accepts Private Pay and United
+        Healthcare Insurance. Superbills are also available upon request for
+        possible reimbursement when applicable.
       </p>
 
       {/* SUBMIT */}

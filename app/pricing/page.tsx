@@ -23,14 +23,21 @@ export default function PricingPage() {
         <section className="mb-16">
           <h2 className="text-3xl text-[#3f4a41] mb-6">Insurance</h2>
 
-          <div className="space-y-4 text-gray-700 text-lg">
-            <p>
-              Chizara Therapeutic Services does not accept insurance and
-              operates as a private-pay practice.
-            </p>
+          <div className="space-y-5 text-gray-700 text-lg">
+            <div>
+              <p className="mb-3">
+                Chizara Therapeutic Services currently accepts the following payment
+                options and insurance:
+              </p>
+
+              <ul className="list-disc list-inside space-y-2">
+                <li>Private Pay</li>
+                <li>United Healthcare Insurance</li>
+              </ul>
+            </div>
 
             <p>
-              However, we provide{" "}
+              We also provide{" "}
               <a
                 href="/what-is-a-superbill"
                 className="underline text-[#e8a693]"
@@ -38,19 +45,18 @@ export default function PricingPage() {
                 superbills
               </a>{" "}
               upon request, which you may submit to your insurance provider for
-              possible reimbursement.
+              possible reimbursement when applicable.
             </p>
 
             <p>
-              We strongly recommend contacting your insurance provider before
-              beginning therapy to confirm whether they accept superbills and
-              reimburse out-of-network services.
+              If you have questions about your coverage or benefits, we encourage you
+              to contact your insurance provider before beginning therapy.
             </p>
           </div>
         </section>
 
         {/* CTA */}
-        <div className="text-center mt-20">
+        <div className="flex selft-start text-center mt-20">
           <a
             href="/schedule-form"
             className="bg-[#e8a693] text-white px-10 py-3 rounded-full"

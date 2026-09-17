@@ -11,7 +11,9 @@ import Navbar from "./components/navbar";
 import { CarouselDemo } from "./components/carousel";
 import ContactUs from "./components/contact-us";
 import CTA from "./components/cta";
-import PricingPreview from "@/components/pricingPreview";
+// import PricingPreview from "@/components/pricingPreview";
+// import InsuranceOptions from "./components/InsuranceOptions";
+import PricingInsuranceSection from "./components/PricingInsuranceSection";
 
 export default function Home() {
   const services = [
@@ -74,7 +76,7 @@ export default function Home() {
                 alt={`Image of ${service.title}`}
                 className="relative z-20 max-w-none w-55 h-55"
                 objectFit="cover"
-                // fill
+              // fill
               />
             </div>
             <h3 className="mb-4 text-gray-800">{service.title}</h3>
@@ -113,7 +115,9 @@ export default function Home() {
         </div>
       </section>
 
-      <PricingPreview />
+      <PricingInsuranceSection />
+
+      {/* <PricingPreview /> */}
 
       {/* Contact Section */}
       <ContactUs />

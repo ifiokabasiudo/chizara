@@ -260,7 +260,7 @@ export default function ContactUs() {
             <p className="text-sm text-gray-300 mt-6 max-w-md">
               * Chizara Therapeutic Services currently accepts Private Pay and United
               Healthcare Insurance. Superbills are also available upon request for
-              possible reimbursement when applicable.
+              possible reimbursement when applicable. We do not take Medicaid or Medicare at this time.
             </p>
 
             {/* SUBMIT */}

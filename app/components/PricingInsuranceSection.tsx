@@ -48,7 +48,10 @@ export default function PricingInsuranceSection() {
                         benefits, please contact your insurance provider before beginning
                         therapy.
                     </p>
+
+                    <p className="text-[16px] leading-7 text-rose-600">* Please note: We do not take Medicaid or Medicare at this time.</p>
                 </div>
+
 
                 <div className="mt-8">
                     <Link
